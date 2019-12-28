@@ -1,17 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <game-stepper v-if="createGame"></game-stepper>
+    <game-main v-else-if="gameReady"></game-main>
+    <main-screen v-else></main-screen>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import MainScreen from './components/MainScreen'
+import GameStepper from './components/GameStepper'
+import GameMain from './components/GameMain'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    MainScreen,
+    GameStepper,
+    GameMain,
+  },
+  data() {
+    const status = this.$ls.get('gameStatus') || {}
+    return {
+      createGame: status.started === true && status.ready !== true,
+      gameReady: status.ready === true
+    }
+  },
+  mounted() {
+    this.$ls.on('gameStatus', (newStatus = {}) => {
+      this.createGame = newStatus.started === true && status.ready !== true
+      this.gameReady = newStatus.ready === true
+    })
   }
 }
 </script>
@@ -24,5 +43,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
 }
 </style>

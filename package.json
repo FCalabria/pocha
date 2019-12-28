@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.4.4",
-    "vue": "^2.6.10"
+    "keen-ui": "^1.2.1",
+    "vue": "^2.6.10",
+    "vue-ls": "^3.2.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
@@ -29,7 +31,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "vue/no-async-in-computed-properties": "warning"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
