@@ -63,6 +63,7 @@ export default {
     startGame() {
       this.$ls.set('players', this.players)
       this.$ls.set('gameStatus', {started: true, ready: true})
+      this.$router.push({name: 'playGame'})
     }
   }
 }

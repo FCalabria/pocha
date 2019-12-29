@@ -18,6 +18,7 @@ export default {
       this.$ls.set('gameStatus', {started: true, ready: false})
       this.$ls.set('players', [])
       this.$ls.set('rounds', [])
+      this.$router.push({name: 'configureGame'})
     }
   }
 }
