@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="view-container">
     Current status
     Button to show table
   </div>

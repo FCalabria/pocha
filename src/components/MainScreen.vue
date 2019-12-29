@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="view-container">
     <ui-button v-on:click="startGame" color="primary">Iniciar partida</ui-button>
   </div>
 </template>
@@ -22,4 +22,9 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.view-container {
+  justify-content: center;
+}
+</style>
 
