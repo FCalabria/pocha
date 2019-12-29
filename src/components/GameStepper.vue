@@ -17,7 +17,7 @@
       v-on:click="startGame"
       type="secondary"
       color="primary"
-      v-if="players.length !== 0"
+      v-if="players.length >= 2"
     >
       Listo
     </ui-button>
