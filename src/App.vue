@@ -15,7 +15,7 @@ export default {
     if (createGame) {
       routeName = 'configureGame'
     } else if (gameReady) {
-      routeName = 'playGame'
+      routeName = 'bet'
     }
     this.$router.push({name: routeName})
   }

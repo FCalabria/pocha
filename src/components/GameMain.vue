@@ -1,6 +1,7 @@
 <template>
   <div class="view-container">
     <view-status :players="players"/>
+    <router-view></router-view>
     <!-- Sub view for current step (deal, ask, play, enter results) -->
   </div>
 </template>
