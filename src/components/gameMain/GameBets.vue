@@ -1,6 +1,6 @@
 <template>
   <div class="cards-container" ref="scroller">
-    <div v-for="(player, i) in players" :key="i" class="card" ref="card">
+    <div v-for="(player, i) in sortedPlayers" :key="i" class="card" ref="card">
       <ui-icon-button
         size="large"
         icon="navigate_before"
@@ -8,7 +8,7 @@
         v-if="i !== 0"
         v-on:click="toPrevPlayer"
       />
-      <div class="card-content">{{player}}</div>
+      <bet-card-content class="card-content" :player="player" :max-bet="maxBet"/>
       <ui-icon-button
         size="large"
         icon="navigate_next"
@@ -21,18 +21,30 @@
 </template>
 <script>
 import {UiIconButton} from 'keen-ui'
+import BetCardContent from './BetCardContent'
+
 export default {
   name: 'GameBets',
   components: {
-    UiIconButton
+    UiIconButton,
+    BetCardContent,
   },
   data() {
     return {
-      players: []
+      players: [],
+      maxBet: 0
+    }
+  },
+  computed: {
+    sortedPlayers() {
+      // TODO sort with correct bet order
+      return this.players
     }
   },
   mounted() {
     this.players = this.$ls.get('players')
+    const round = this.$ls.get('roundStatus')
+    this.maxBet = round.cardsDealt
   },
   methods: {
     toPrevPlayer() {
@@ -55,14 +67,22 @@ export default {
 }
 .card {
   flex: 1 0 100%;
+  min-width: 100%;
   margin: 0 .5rem;
   display: grid;
   grid-template-columns: 3rem 1fr 3rem;
   align-items: center;
   scroll-snap-align: center;
   scroll-snap-stop: always;
+  &:first-child {
+    margin-left: 0;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
 }
 .card-content {
   grid-column: 2 / span 1;
+  margin-bottom: 4rem;
 }
 </style>

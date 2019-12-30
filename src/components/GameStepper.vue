@@ -28,6 +28,7 @@
 import { UiButton } from 'keen-ui';
 import PlayerInput from './gameStepper/PlayerInput'
 import PlayerPreview from './gameStepper/PlayerPreview'
+import * as r from '../utils/rules'
 export default {
   name: 'gameStepper',
   components: {
@@ -61,9 +62,11 @@ export default {
       this.players.splice(prevIndex, 2, player, this.players[prevIndex])
     },
     startGame() {
+      this.$ls.set('rounds', [])
       this.$ls.set('players', this.players)
       this.$ls.set('gameStatus', {started: true, ready: true})
-      this.$router.push({name: 'playGame'})
+      this.$ls.set('roundStatus', r.getNextRoundStatus(0, this.players.length))
+      this.$router.push({name: 'bet'})
     }
   }
 }
