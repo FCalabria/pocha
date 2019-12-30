@@ -1,5 +1,5 @@
 <template>
-  <table>
+  <table class="table table--with-header">
     <thead>
       <td>Jugador</td>
       <td colspan="2">Puntos</td>
@@ -39,25 +39,17 @@ export default {
 <style lang="scss" scoped>
 @import "~keen-ui/src/styles/md-colors.scss";
   table {
-    text-align: left;
-    width: 100%;
     padding: 1rem;
   }
   tr {
     font-size: 1.3rem;
-    & td {
-      padding-top: .5rem;
+    td {
       &:first-child {
         font-weight: 600;
-        padding-right: .5rem;
       }
       &:last-child {
         color: $md-dark-text-hint;
       }
-    }
-    &:not(:last-of-type) td {
-      border-bottom: .0625rem solid rgba(0,0,0,.12);
-      padding-bottom: .5rem;
     }
   }
 </style>
