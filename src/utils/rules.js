@@ -28,10 +28,10 @@ function getDealerNextRound(rounds, players) {
 }
 
 function getPlayersOrderNextRound(rounds, players) {
-  const first = getDealerNextRound(rounds, players)
+  const last = getDealerNextRound(rounds, players)
   return new Array(players).fill(0)
     .map((v, i) => {
-      const base = first + i;
+      const base = last + i + 1;
       return base < players ? base : base - players
     })
 }

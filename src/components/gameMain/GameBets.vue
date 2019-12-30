@@ -87,10 +87,11 @@ export default {
     },
     getInvalidBet(playerOrder, player) {
       if (playerOrder === this.players.length - 1) {
-        const allBets = Object.values(this.bets)
-        allBets.pop()
-        const totalBets = allBets.reduce((total, current) => total + current, 0)
-        return this.maxBet - totalBets === this.bets[player]
+        const validBets = Object.entries(this.bets)
+          .reduce((total, [currentPlayer, currentBet]) => currentPlayer !== player 
+            ? total + currentBet
+            : total, 0)
+        return this.maxBet - validBets === this.bets[player]
       }
     },
     startRound() {
