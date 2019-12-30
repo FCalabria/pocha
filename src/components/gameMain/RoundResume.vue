@@ -1,6 +1,6 @@
 <template>
   <div class="view-container">
-    <last-round-table :round="lastRound" :previous-round="previousRound"/>
+    <last-round-table :round="lastRound" :previous-round="previousRound" :trend="true"/>
     <ui-button
       color="primary"
       v-on:click="clickOk"
@@ -11,7 +11,7 @@
 </template>
 <script>
 import { UiButton } from 'keen-ui';
-import LastRoundTable from './LastRoundTable'
+import LastRoundTable from '../microComponents/LastRoundTable'
 import * as r from '../../utils/rules'
 
 export default {

@@ -7,7 +7,7 @@
     <tr v-for="(data, player) in round" :key="player">
       <td>{{player}}</td>
       <td>{{data.points}}</td>
-      <td><up-down :difference="getPointsDifference(player, data.points)" /></td>
+      <td class="trend" v-if="trend"><up-down :difference="getPointsDifference(player, data.points)" /></td>
     </tr>
   </table>
 </template>
@@ -26,6 +26,10 @@ export default {
     previousRound: {
       type: Object,
       required: true
+    },
+    trend: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -47,7 +51,7 @@ export default {
       &:first-child {
         font-weight: 600;
       }
-      &:last-child {
+      &.trend {
         color: $md-dark-text-hint;
       }
     }
