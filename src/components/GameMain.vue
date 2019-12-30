@@ -1,17 +1,17 @@
 <template>
   <div class="view-container">
-    <view-status :players="players"/>
+    <!-- <view-status :players="players"/> -->
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import ViewStatus from './gameMain/ViewStatus'
+// import ViewStatus from './gameMain/ViewStatus'
 export default {
   name: 'gameMain',
-  components: {
-    ViewStatus
-  },
+  // components: {
+  //   ViewStatus
+  // },
   data() {
     return {
       players: [],
