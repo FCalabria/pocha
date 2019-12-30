@@ -13,7 +13,7 @@
           class="card-content"
           :player="player"
           :max-bet="maxBet"
-          :bet="bets[player]"
+          :bet="done[player]"
           v-on:changeBet="changeBet"
         >
           <p>hizo</p>
@@ -27,8 +27,10 @@
         />
       </div>
     </div>
-    <!-- TODO disable if cards and bets doesnt match -->
-    <ok-button v-on:click="finishRound"/>
+    <div v-show="!isValidCount">
+      <p>Asignadas {{totalDone}} de {{maxBet}}</p>
+    </div>
+    <ok-button v-on:click="finishRound" v-show="isValidCount"/>
   </div>
 </template>
 <script>
@@ -49,7 +51,7 @@ export default {
       players: [],
       playersOrder: [],
       maxBet: 0,
-      bets: {},
+      done: {},
     }
   },
   computed: {
@@ -59,13 +61,19 @@ export default {
     lastPlayer() {
       return this.sortedPlayers[this.sortedPlayers.length - 1]
     },
+    totalDone() {
+      return Object.values(this.done).reduce((acc, playerDone) => acc + playerDone, 0)
+    },
+    isValidCount() {
+      return this.maxBet === this.totalDone
+    }
   },
   mounted() {
     this.players = this.$ls.get('players')
     const round = this.$ls.get('roundStatus')
     this.playersOrder = round.playersOrder
     this.maxBet = round.cardsDealt
-    this.bets = this.players.reduce((acc, player) => {
+    this.done = this.players.reduce((acc, player) => {
       acc[player] = 0
       return acc
     }, {})
@@ -80,14 +88,14 @@ export default {
       this.$refs.scroller.scrollBy({left: cardWidth, behaviour: 'smooth'})
     },
     changeBet(data) {
-      this.bets[data.player] = data.newBet
+      this.done[data.player] = data.newBet
     },
     finishRound() {
       const rounds = this.$ls.get('rounds')
       const lastRound = rounds[rounds.length -1]
-      for (const player in this.bets) {
+      for (const player in this.done) {
         const playerLastRound = lastRound[player]
-        playerLastRound.didRounds = this.bets[player]
+        playerLastRound.didRounds = this.done[player]
         const previousPoints = rounds.length > 1
           ? rounds[rounds.length - 2][player].points
           : 0
