@@ -8,16 +8,16 @@
 export default {
   name: 'app',
   mounted() {
-    const status = this.$ls.get('gameStatus') || {}
-    const createGame = status.started === true && status.ready !== true
-    const gameReady = status.ready === true
-    let routeName = 'main'
-    if (createGame) {
-      routeName = 'configureGame'
-    } else if (gameReady) {
-      routeName = 'bet'
-    }
-    this.$router.push({name: routeName})
+    // const status = this.$ls.get('gameStatus') || {}
+    // const createGame = status.started === true && status.ready !== true
+    // const gameReady = status.ready === true
+    // let routeName = 'main'
+    // if (createGame) {
+    //   routeName = 'configureGame'
+    // } else if (gameReady) {
+    //   routeName = 'playGame'
+    // }
+    // this.$router.push({name: 'main'})
   }
 }
 </script>

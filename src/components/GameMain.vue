@@ -19,6 +19,7 @@ export default {
   },
   mounted() {
     this.players = this.$ls.get('players')
+    // this.$router.push({name: 'bet'})
   },
 }
 </script>

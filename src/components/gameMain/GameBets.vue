@@ -103,7 +103,10 @@ export default {
       const nextRound = {last: this.lastPlayer, ...calculatedBets}
       rounds.push(nextRound)
       this.$ls.set('rounds', rounds)
-      this.$router.push('playing')
+      // const roundStatus = this.$ls.get('roundStatus')
+      // roundStatus.status = 'play'
+      // this.$ls.set('roundStatus', roundStatus)
+      this.$router.push({name: 'play'})
     }
   }
 }

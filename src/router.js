@@ -8,6 +8,7 @@ import GameInPlay from './components/gameMain/GameInPlay'
 
 Vue.use(VueRouter)
 // TODO: Add navigation guards that redirect depending on the status
+
 export default new VueRouter({
   routes: [
     {
@@ -31,9 +32,9 @@ export default new VueRouter({
           path: 'bet',
         },
         {
-          name: 'playing',
+          name: 'play',
           component: GameInPlay,
-          path: 'playing'
+          path: 'play'
         },
         {
           path: '',
@@ -41,5 +42,9 @@ export default new VueRouter({
         }
       ]
     },
-  ]
+    {
+      path: '',
+      redirect: '/main'
+    }
+  ],
 })
