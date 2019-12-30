@@ -8,7 +8,14 @@
         v-if="i !== 0"
         v-on:click="toPrevPlayer"
       />
-      <bet-card-content class="card-content" :player="player" :max-bet="maxBet"/>
+      <bet-card-content
+        class="card-content"
+        :player="player"
+        :max-bet="maxBet"
+        :invalid-bet="getInvalidBet(i)"
+        :bet="bets[player]"
+        v-on:changeBet="changeBet"
+      />
       <ui-icon-button
         size="large"
         icon="navigate_next"
@@ -33,7 +40,8 @@ export default {
     return {
       players: [],
       playersOrder: [],
-      maxBet: 0
+      maxBet: 0,
+      bets: {},
     }
   },
   computed: {
@@ -46,6 +54,10 @@ export default {
     const round = this.$ls.get('roundStatus')
     this.playersOrder = round.playersOrder
     this.maxBet = round.cardsDealt
+    this.bets = this.players.reduce((acc, player) => {
+      acc[player] = 0
+      return acc
+    }, {})
   },
   methods: {
     toPrevPlayer() {
@@ -56,6 +68,17 @@ export default {
       const cardWidth = this.$refs.card[0].clientWidth;
       this.$refs.scroller.scrollBy({left: cardWidth, behaviour: 'smooth'})
     },
+    changeBet(data) {
+      this.bets[data.player] = data.newBet
+    },
+    getInvalidBet(playerOrder) {
+      if (playerOrder === this.players.length - 1) {
+        const allBets = Object.values(this.bets)
+        allBets.pop()
+        const totalBets = allBets.reduce((total, current) => total + current, 0)
+        return this.maxBet - totalBets
+      }
+    }
   }
 }
 </script>

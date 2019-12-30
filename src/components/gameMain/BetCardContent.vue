@@ -8,24 +8,23 @@
         size="large"
         icon="add"
         aria-label="más"
-        v-on:click="bet++"
+        v-on:click="increaseBet"
         :disabled="bet >= maxBet"
     />
-    <p class="bet">{{bet}}</p>
+    <p :class="['bet', 'text-huge', invalidBet === bet && 'text-red']">{{bet}}</p>
     <ui-icon-button
         type="primary"
         color="primary"
         size="large"
         icon="remove"
         aria-label="menos"
-        v-on:click="bet--"
+        v-on:click="decreaseBet"
         :disabled="bet <= 0"
     />
     <p>de <span class="max-bet">{{maxBet}}</span> manos</p>
   </div>
 </template>
 <script>
-// TODO: manage invalid bet
 import {UiIconButton} from 'keen-ui'
 export default {
   name: 'BetCardContent',
@@ -40,18 +39,27 @@ export default {
     maxBet: {
       type: Number,
       required: true,
+    },
+    bet: {
+      type: Number,
+      default: 0
+    },
+    invalidBet: {
+      type: Number
     }
   },
-  data () {
-    return {
-      bet: 0
+  methods: {
+    increaseBet() {
+      this.$emit('changeBet', {newBet: this.bet + 1, player: this.player})
+    },
+    decreaseBet() {
+      this.$emit('changeBet', {newBet: this.bet - 1, player: this.player})
     }
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
 .bet {
-  font-size: 8rem;
   margin: 0;
 }
 .max-bet {
