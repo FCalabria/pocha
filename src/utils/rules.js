@@ -19,8 +19,34 @@ function getCardsDealtNextRound(rounds, players) {
     return maxCardsDealt
   }
 }
+
+function getDealerNextRound(rounds, players) {
+  while (rounds >= players) {
+    rounds = rounds - players
+  }
+  return rounds
+}
+
+function getPlayersOrderNextRound(rounds, players) {
+  const first = getDealerNextRound(rounds, players)
+  return new Array(players).fill(0)
+    .map((v, i) => {
+      const base = first + i;
+      return base < players ? base : base - players
+    })
+}
+
+/**
+ * Gives info about the cards to deal the next round and the players order
+ * @param {Number} rounds rounds done until now
+ * @param {Number} players
+ * @returns {Object} the status for the next round
+ */
 function getNextRoundStatus(rounds, players) {
-  return {cardsDealt: getCardsDealtNextRound(rounds, players)}
+  return {
+    cardsDealt: getCardsDealtNextRound(rounds, players),
+    playersOrder: getPlayersOrderNextRound(rounds, players)
+  }
 }
 export {
   getNextRoundStatus

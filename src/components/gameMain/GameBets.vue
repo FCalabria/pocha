@@ -32,18 +32,19 @@ export default {
   data() {
     return {
       players: [],
+      playersOrder: [],
       maxBet: 0
     }
   },
   computed: {
     sortedPlayers() {
-      // TODO sort with correct bet order
-      return this.players
+      return this.playersOrder.map(playerIndex => this.players[playerIndex])
     }
   },
   mounted() {
     this.players = this.$ls.get('players')
     const round = this.$ls.get('roundStatus')
+    this.playersOrder = round.playersOrder
     this.maxBet = round.cardsDealt
   },
   methods: {
