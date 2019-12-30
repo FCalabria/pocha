@@ -1,7 +1,7 @@
 <template>
   <div class="view-container">
     <p class="text-huge">{{dealer}}</p>
-    <p>{{dinamicText.deals}} <span class="max-bet">{{cardsDealt}}</span> {{dinamicText.card}}</p>
+    <p>reparte <span class="max-bet">{{cardsDealt}}</span> {{dinamicText.card}}</p>
     <ui-button v-on:click="startBets" color="primary">Hecho</ui-button>
   </div>
 </template>
@@ -21,8 +21,8 @@ export default {
   computed: {
     dinamicText() {
       return this.cardsDealt === 1
-      ? {deals: 'reparte', card: 'carta'}
-      : {deals: 'reparten', card: 'cartas'}
+      ? {card: 'carta'}
+      : {card: 'cartas'}
     }
   },
   mounted () {

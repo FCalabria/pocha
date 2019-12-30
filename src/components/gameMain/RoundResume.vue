@@ -39,6 +39,7 @@ export default {
       const rounds = this.$ls.get('rounds')
       const players = this.$ls.get('players')
       const maxRounds = r.getMaxRounds(players.length)
+      this.$ls.set('roundStatus', r.getNextRoundStatus(rounds.length, players.length))
       if (rounds === maxRounds) {
         this.$router.push({name: 'endGame'})
       } else {

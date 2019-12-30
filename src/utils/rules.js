@@ -9,7 +9,7 @@ function getMaxRounds(players) {
 function getCardsDealtNextRound(rounds, players) {
   const maxRounds = getMaxRounds(players)
   const maxCardsDealt = getMaxCardsDealt(players)
-  if (rounds <= players || rounds >= maxRounds - players) {
+  if (rounds < players || rounds >= maxRounds - players) {
     return 1
   } else if (rounds <= maxCardsDealt + players - 1) {
     return rounds - players + 2
