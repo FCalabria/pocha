@@ -63,7 +63,7 @@ export default {
   height: 100%;
   display: flex;
   overflow-y: auto;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: x mandatory;
 }
 .card {
   flex: 1 0 100%;
