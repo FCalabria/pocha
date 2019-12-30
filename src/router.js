@@ -4,6 +4,7 @@ import MainScreen from './components/MainScreen'
 import GameStepper from './components/GameStepper'
 import GameMain from './components/GameMain'
 import GameBets from './components/gameMain/GameBets'
+import GameInPlay from './components/gameMain/GameInPlay'
 
 Vue.use(VueRouter)
 // TODO: Add navigation guards that redirect depending on the status
@@ -28,6 +29,11 @@ export default new VueRouter({
           name: 'bet',
           component: GameBets,
           path: 'bet',
+        },
+        {
+          name: 'playing',
+          component: GameInPlay,
+          path: 'playing'
         },
         {
           path: '',

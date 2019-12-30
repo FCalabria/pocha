@@ -1,40 +1,46 @@
 <template>
-  <div class="cards-container" ref="scroller">
-    <div v-for="(player, i) in sortedPlayers" :key="i" class="card" ref="card">
-      <ui-icon-button
-        size="large"
-        icon="navigate_before"
-        aria-label="anterior"
-        v-if="i !== 0"
-        v-on:click="toPrevPlayer"
-      />
-      <bet-card-content
-        class="card-content"
-        :player="player"
-        :max-bet="maxBet"
-        :invalid-bet="getInvalidBet(i)"
-        :bet="bets[player]"
-        v-on:changeBet="changeBet"
-      />
-      <ui-icon-button
-        size="large"
-        icon="navigate_next"
-        aria-label="siguiente"
-        v-if="i !== players.length - 1"
-        v-on:click="toNextPlayer"
-      />
+  <div class="view-container">
+    <div class="cards-container" ref="scroller">
+      <div v-for="(player, i) in sortedPlayers" :key="i" class="card" ref="card">
+        <ui-icon-button
+          size="large"
+          icon="navigate_before"
+          aria-label="anterior"
+          v-if="i !== 0"
+          v-on:click="toPrevPlayer"
+        />
+        <bet-card-content
+          class="card-content"
+          :player="player"
+          :max-bet="maxBet"
+          :invalid-bet="getInvalidBet(i, player)"
+          :bet="bets[player]"
+          v-on:changeBet="changeBet"
+        />
+        <ui-icon-button
+          size="large"
+          icon="navigate_next"
+          aria-label="siguiente"
+          v-if="i !== players.length - 1"
+          v-on:click="toNextPlayer"
+        />
+      </div>
     </div>
+    <p>Se {{dinamicText.play}} <span class="max-bet">{{maxBet}}</span> {{dinamicText.card}}</p>
+    <ok-button v-on:click="startRound" :disabled="getInvalidBet(players.length - 1, lastPlayer)"/>
   </div>
 </template>
 <script>
 import {UiIconButton} from 'keen-ui'
 import BetCardContent from './BetCardContent'
+import OkButton from '../microComponents/OkButton'
 
 export default {
   name: 'GameBets',
   components: {
     UiIconButton,
     BetCardContent,
+    OkButton
   },
   data() {
     return {
@@ -47,7 +53,15 @@ export default {
   computed: {
     sortedPlayers() {
       return this.playersOrder.map(playerIndex => this.players[playerIndex])
-    }
+    },
+    lastPlayer() {
+      return this.sortedPlayers[this.sortedPlayers.length - 1]
+    },
+    dinamicText() {
+      return this.maxBet === 1
+      ? {play: 'juega', card: 'carta'}
+      : {play: 'juegan', card: 'cartas'}
+    },
   },
   mounted() {
     this.players = this.$ls.get('players')
@@ -71,13 +85,25 @@ export default {
     changeBet(data) {
       this.bets[data.player] = data.newBet
     },
-    getInvalidBet(playerOrder) {
+    getInvalidBet(playerOrder, player) {
       if (playerOrder === this.players.length - 1) {
         const allBets = Object.values(this.bets)
         allBets.pop()
         const totalBets = allBets.reduce((total, current) => total + current, 0)
-        return this.maxBet - totalBets
+        return this.maxBet - totalBets === this.bets[player]
       }
+    },
+    startRound() {
+      const rounds = this.$ls.get('rounds')
+      let calculatedBets = {...this.bets}
+      for (const player in calculatedBets) {
+        const askedRounds = calculatedBets[player];
+        calculatedBets[player] = { askedRounds }
+      }
+      const nextRound = {last: this.lastPlayer, ...calculatedBets}
+      rounds.push(nextRound)
+      this.$ls.set('rounds', rounds)
+      this.$router.push('playing')
     }
   }
 }
@@ -108,5 +134,9 @@ export default {
 .card-content {
   grid-column: 2 / span 1;
   margin-bottom: 4rem;
+}
+.max-bet {
+  font-weight: 600;
+  font-size: 2rem;
 }
 </style>

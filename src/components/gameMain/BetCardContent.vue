@@ -11,7 +11,7 @@
         v-on:click="increaseBet"
         :disabled="bet >= maxBet"
     />
-    <p :class="['bet', 'text-huge', invalidBet === bet && 'text-red']">{{bet}}</p>
+    <p :class="['bet', 'text-huge', invalidBet && 'text-red']">{{bet}}</p>
     <ui-icon-button
         type="primary"
         color="primary"
@@ -21,7 +21,6 @@
         v-on:click="decreaseBet"
         :disabled="bet <= 0"
     />
-    <p>de <span class="max-bet">{{maxBet}}</span> manos</p>
   </div>
 </template>
 <script>
@@ -45,7 +44,8 @@ export default {
       default: 0
     },
     invalidBet: {
-      type: Number
+      type: Boolean,
+      defalut: false
     }
   },
   methods: {
@@ -61,9 +61,5 @@ export default {
 <style lang="scss" scoped>
 .bet {
   margin: 0;
-}
-.max-bet {
-  font-weight: 600;
-  font-size: 2rem;
 }
 </style>

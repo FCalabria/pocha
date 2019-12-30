@@ -12,27 +12,19 @@
         :order="i + 1"
       />
     </div>
-    <ui-button
-      class="btn-start"
-      v-on:click="startGame"
-      type="secondary"
-      color="primary"
-      v-if="players.length >= 2"
-    >
-      Listo
-    </ui-button>
+    <ok-button v-if="players.length >= 2" v-on:click="startGame"/>
   </div>
 </template>
 
 <script>
-import { UiButton } from 'keen-ui';
 import PlayerInput from './gameStepper/PlayerInput'
 import PlayerPreview from './gameStepper/PlayerPreview'
+import OkButton from './microComponents/OkButton'
 import * as r from '../utils/rules'
 export default {
   name: 'gameStepper',
   components: {
-    UiButton,
+    OkButton,
     PlayerInput,
     PlayerPreview,
   },
@@ -71,8 +63,3 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.btn-start {
-  margin-top: auto;
-}
-</style>
