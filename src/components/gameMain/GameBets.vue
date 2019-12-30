@@ -16,7 +16,9 @@
           :invalid-bet="getInvalidBet(i, player)"
           :bet="bets[player]"
           v-on:changeBet="changeBet"
-        />
+        >
+          <p>quiere</p>
+        </bet-card-content>
         <ui-icon-button
           size="large"
           icon="navigate_next"

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>{{player}}</h2>
-    <p>quiere</p>
+    <slot />
     <ui-icon-button
         type="primary"
         color="primary"
