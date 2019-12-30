@@ -35,6 +35,7 @@
 import {UiIconButton} from 'keen-ui'
 import BetCardContent from './BetCardContent'
 import OkButton from '../microComponents/OkButton'
+import * as r from '../../utils/rules'
 
 export default {
   name: 'GameBets',
@@ -82,12 +83,18 @@ export default {
       this.bets[data.player] = data.newBet
     },
     finishRound() {
-      /**
-       * TODO:
-       * Calculate new points
-       * Update rounds in ls
-       * Go to round resume
-       */
+      const rounds = this.$ls.get('rounds')
+      const lastRound = rounds[rounds.length -1]
+      for (const player in this.bets) {
+        const playerLastRound = lastRound[player]
+        playerLastRound.didRounds = this.bets[player]
+        const previousPoints = rounds.length > 1
+          ? rounds[rounds.length - 2][player].points
+          : 0
+        playerLastRound.points = r.calculateRoundPoints(playerLastRound.askedRounds, playerLastRound.didRounds) + previousPoints
+      }
+      this.$ls.set('rounds', rounds)
+      this.$router.push({name: 'roundResume'})
     }
   }
 }

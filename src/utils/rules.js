@@ -48,6 +48,19 @@ function getNextRoundStatus(rounds, players) {
     playersOrder: getPlayersOrderNextRound(rounds, players)
   }
 }
+
+/**
+ * Calculates the given points for a round, given the bet and result
+ * @param {Number} askedRounds
+ * @param {Number} didRounds
+ * @returns {Number}
+ */
+function calculateRoundPoints(askedRounds, didRounds) {
+  return askedRounds === didRounds
+    ? 10 + didRounds * 5
+    : - Math.abs(askedRounds - didRounds) * 5
+}
 export {
-  getNextRoundStatus
+  getNextRoundStatus,
+  calculateRoundPoints
 }
