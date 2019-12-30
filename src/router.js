@@ -2,6 +2,7 @@ import VueRouter from 'vue-router'
 import Vue from 'vue'
 import MainScreen from './components/MainScreen'
 import GameStepper from './components/GameStepper'
+import EndGame from './components/EndGame'
 import GameMain from './components/GameMain'
 import GameDeal from './components/gameMain/GameDeal'
 import GameBets from './components/gameMain/GameBets'
@@ -23,6 +24,11 @@ export default new VueRouter({
       name: 'configureGame',
       component: GameStepper,
       path: '/configure'
+    },
+    {
+      name: 'endGame',
+      component: EndGame,
+      path: '/end'
     },
     {
       name: 'playGame',

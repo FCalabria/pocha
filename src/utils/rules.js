@@ -62,5 +62,6 @@ function calculateRoundPoints(askedRounds, didRounds) {
 }
 export {
   getNextRoundStatus,
-  calculateRoundPoints
+  calculateRoundPoints,
+  getMaxRounds
 }
