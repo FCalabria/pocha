@@ -2,7 +2,8 @@
   <table class="table table--with-header">
     <thead>
       <td>Jugador</td>
-      <td colspan="2">Puntos</td>
+      <td>Acumulado</td>
+      <td v-if="trend">Ronda</td>
     </thead>
     <tr v-for="(data, player) in round" :key="player">
       <td>{{player}}</td>
