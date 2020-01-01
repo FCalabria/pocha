@@ -1,0 +1,6 @@
+@import '~keen-ui/src/styles/md-colors.scss';
+.ui-modal {
+  &.ui-modal__mask {
+    background-color: rgba(255, 255, 255, .8);
+  }
+}
