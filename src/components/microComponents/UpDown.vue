@@ -12,7 +12,7 @@
   </span>
 </template>
 <script>
-import {UiIcon} from 'keen-ui'
+import UiIcon from 'keen-ui/lib/UiIcon';
 export default {
   name: 'UpDown',
   components: {

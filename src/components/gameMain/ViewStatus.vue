@@ -9,7 +9,7 @@
   </ui-collapsible>
 </template>
 <script>
-import {UiCollapsible} from 'keen-ui'
+import UiCollapsible from 'keen-ui/lib/UiCollapsible';
 export default {
   name: 'ViewStatus',
   components: {

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Storage from 'vue-ls';
-import 'keen-ui/dist/keen-ui.css';
+import 'keen-ui/src/bootstrap';
 import App from './App.vue'
 import router from './router'
 

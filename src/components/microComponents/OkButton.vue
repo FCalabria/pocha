@@ -10,7 +10,7 @@
     </ui-button>
 </template>
 <script>
-import { UiButton } from 'keen-ui';
+import UiButton from 'keen-ui/lib/UiButton';
 export default {
   name: 'OkButton',
   components: {

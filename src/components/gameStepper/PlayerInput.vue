@@ -19,7 +19,8 @@
     </div>
 </template>
 <script>
-import { UiTextbox, UiIconButton } from 'keen-ui';
+import UiTextbox from 'keen-ui/lib/UiTextbox';
+import UiIconButton from 'keen-ui/lib/UiIconButton';
 export default {
   name: 'PlayerInput',
   components: {

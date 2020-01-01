@@ -34,7 +34,7 @@
   </div>
 </template>
 <script>
-import {UiIconButton} from 'keen-ui'
+import UiIconButton from 'keen-ui/lib/UiIconButton'
 import BetCardContent from './BetCardContent'
 import OkButton from '../microComponents/OkButton'
 import * as r from '../../utils/rules'

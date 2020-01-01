@@ -24,7 +24,7 @@
   </div>
 </template>
 <script>
-import {UiIconButton} from 'keen-ui'
+import UiIconButton from 'keen-ui/lib/UiIconButton';
 export default {
   name: 'BetCardContent',
   components: {
