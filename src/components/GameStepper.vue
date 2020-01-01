@@ -56,7 +56,6 @@ export default {
     startGame() {
       this.$ls.set('rounds', [])
       this.$ls.set('players', this.players)
-      this.$ls.set('gameStatus', {started: true, ready: true})
       this.$ls.set('roundStatus', r.getNextRoundStatus(0, this.players.length))
       this.$router.push({name: 'deal'})
     }

@@ -41,6 +41,14 @@
       "parser": "babel-eslint"
     }
   },
+  "jscpd": {
+    "reporters": ["html", "console"],
+    "ignore": ["**/__snapshots__/**"],
+    "mode": "strict",
+    "absolute": true,
+    "gitignore": true,
+    "ignoreCase": true
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions"
