@@ -11,10 +11,10 @@ function getCardsDealtNextRound(rounds, players) {
   const maxCardsDealt = getMaxCardsDealt(players)
   if (rounds < players || rounds >= maxRounds - players) {
     return 1
-  } else if (rounds <= maxCardsDealt + players - 1) {
+  } else if (rounds <= maxCardsDealt + players - 3) {
     return rounds - players + 2
-  } else if (rounds > (maxCardsDealt - 2) + players * 2) {
-    return maxRounds - rounds - players - 1
+  } else if (rounds > maxCardsDealt + (players - 1) * 2 - 1) {
+    return maxRounds - rounds - players + 1
   } else {
     return maxCardsDealt
   }
